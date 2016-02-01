@@ -1,0 +1,50 @@
+
+/**
+ * Created by sandeep on 1/2/16.
+ */
+public class Battery {
+
+    public int chargeInPercentage  = 10;
+
+    BatteryCallBacks callBack;
+
+    Battery(BatteryCallBacks callBack){
+
+        this.callBack = callBack;
+    }
+
+
+    public void doCharging() {
+
+        Thread thread = new Thread(){
+
+            public void run(){
+
+                while( chargeInPercentage != 100) {
+
+                    try{
+
+                        sleep(500);
+
+                    } catch (InterruptedException e) {
+
+                        e.printStackTrace();
+                    }
+
+                    chargeInPercentage+= 10;
+
+                    callBack.onBatteryChanging();
+                }
+
+                if(chargeInPercentage == 100) {
+
+                    callBack.onBatteryFull();
+                }
+
+            }
+        };
+
+        thread.start();
+    }
+
+}

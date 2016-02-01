@@ -1,0 +1,9 @@
+
+/**
+ * Created by sandeep on 1/2/16.
+ */
+interface BatteryCallBacks {
+
+    public void onBatteryChanging();
+    public void onBatteryFull();
+}
